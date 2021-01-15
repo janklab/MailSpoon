@@ -54,7 +54,7 @@ classdef HtmlTableWriter < mailspoon.internal.MailSpoonBaseHandle
       % TODO: Dimension names
       % TODO: Row names
       % Header
-      o.p('<table>')
+      o.p('<table border=1>')
       o.p('  <thead>')
       o.p('    <tr>')
       for iCol = 1:width(t)
