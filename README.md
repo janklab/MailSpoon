@@ -92,6 +92,23 @@ e.html = sprintf(strjoin({
 e.send
 ```
 
+### Generating HTML from data
+
+MailSpoon includes functions for rendering data (such as Matlab `table` arrays) as HTML, for inclusion in your email. The main interface for that is the `mailspoon.htmlify` function.
+
+```matlab
+tbl = array2table(magic(5));
+htmlFragment = mailspoon.htmlify(tbl);
+html = sprintf(strjoin({
+  '<html><body>'
+  '<h1>Here is a table</h1>'
+  '  %s'
+  '</body></html>'
+  }, '\n'), htmlFragment);
+```
+
+### Example
+
 If all goes well, you'll soon be sending emails that look like this!
 
 ![Screenshot of MailSpoon email message](examples/MailSpoon-message-screenshot.png)

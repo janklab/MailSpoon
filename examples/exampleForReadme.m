@@ -1,7 +1,6 @@
 function exampleForReadme
 
 e = mailspoon.HtmlEmail;
-e.setDebug(true);
 e.from = 'Alice Foo <alice@example.com>';
 e.to = ["bob@example.com", "Carol Bar <carol@example.com>"];
 e.subject = 'Hello, World!';
