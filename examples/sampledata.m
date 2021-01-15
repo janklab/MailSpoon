@@ -1,5 +1,10 @@
 classdef sampledata
   % Sample data sets, adapted for MailSpoon's style
+  %
+  % Examples:
+  %
+  % t = sampledata.cereal;
+  % htmlview(t)
   
   methods (Static)
     
