@@ -138,6 +138,10 @@ If you want to see debugging dumps of the internals of the objects, call `inspec
 e.inspect
 ```
 
+## Technology
+
+MailSpoon is built on top of [Apache Commons Email](https://commons.apache.org/proper/commons-email/) and [JavaMail/`javax.mail`](https://javaee.github.io/javamail/).
+
 ## Author
 
 MailSpoon was written by [Andrew Janke](https://apjanke.net).
