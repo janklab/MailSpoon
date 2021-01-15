@@ -19,6 +19,18 @@ classdef Url < mailspoon.internal.MailSpoonBase & dispstrlib.Displayable
     defaultPort
   end
   
+  methods (Static)
+    
+    function out = fromContext(context, spec)
+      arguments
+        context (1,1) mailspoon.Url
+        spec (1,1) string
+      end
+      out = mailspoon.Url(java.net.URL(context.j, spec));
+    end
+    
+  end
+  
   methods
     
     function this = Url(in)
