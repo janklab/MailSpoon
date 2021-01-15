@@ -1,6 +1,13 @@
 classdef HtmlTableWriter < mailspoon.internal.MailSpoonBaseHandle
   % Knows how to render Matlab table arrays as HTML tables
   
+  % TODO: Support passing in a CSS style specific to the table
+  % TODO: Support specifying classes for the table elements on a structural
+  % basis
+  % TODO: Provide a few fun sample CSS styles
+  % TODO: Multi-column variable support
+  % TODO: Nested table support
+  
   % Settings that control its behavior
   properties
     
@@ -51,14 +58,17 @@ classdef HtmlTableWriter < mailspoon.internal.MailSpoonBaseHandle
         colDataStrs{i} = o.colDataToHtmlStrs(t{:,i});
       end
       colDataStrs = [colDataStrs{:}];
+      hasRowNames = ~isempty(t.Properties.RowNames);
       % TODO: Dimension names
-      % TODO: Row names
       % Header
       o.p('<table border=1>')
+      if ~isempty(t.Properties.Description)
+        o.p('  <caption>%s</caption>', htmlescape(t.Properties.Description))
+      end
       o.p('  <thead>')
       o.p('    <tr>')
       for iCol = 1:width(t)
-        o.p('      <th>%s</th>', htmlescape(t.Properties.VariableNames{iCol}))
+        o.p('      <th scope="col">%s</th>', htmlescape(t.Properties.VariableNames{iCol}))
         % TODO: VariableUnits
       end
       o.p('    </tr>')
@@ -66,7 +76,12 @@ classdef HtmlTableWriter < mailspoon.internal.MailSpoonBaseHandle
       % Body Data
       o.p('  <tbody>')
       for iRow = 1:height(t)
-        o.p('     <tr> %s </tr>', strjoin(strcat('<td>', colDataStrs(iRow,:), '</td>'), ' '))
+        str = "     <tr>";
+        if hasRowNames
+          str = str + sprintf(' <th scope="row">%s</th>', htmlescape(t.Properties.RowNames{iRow}));
+        end
+        str = str + sprintf(' %s </tr>', strjoin(strcat('<td>', colDataStrs(iRow,:), '</td>'), ' '));
+        o.p('%s', str)
       end
       o.p('  </tbody>')
       % Footer
@@ -74,7 +89,7 @@ classdef HtmlTableWriter < mailspoon.internal.MailSpoonBaseHandle
       o.p('  </table>')
     end
     
-    function out = colDataToHtmlStrs(this, x)
+    function out = colDataToHtmlStrs(this, x) %#ok<INUSL>
       if size(x, 2) > 1
         error('Multi-column table variables are not supported');
       end
@@ -93,6 +108,8 @@ classdef HtmlTableWriter < mailspoon.internal.MailSpoonBaseHandle
       elseif iscategorical(x)
         % TODO: Do uniqueification trick. Probably do that for strings, too.
         out = htmlescape(string(x));
+      elseif islogical(x)
+        out = num2string(double(x));
       else
         % TODO: whip out dispstrs() here
         error('Unsupported column type: %s', class(x));
