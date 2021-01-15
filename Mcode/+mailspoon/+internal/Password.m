@@ -11,7 +11,7 @@ classdef Password < mailspoon.internal.MailSpoonBase & dispstrlib.Displayable
   methods
     
     function this = Password(str)
-      % Construct a new password by wrapping a string
+      % Construct a new Password by wrapping a string
       if nargin == 0
         return
       end
@@ -31,6 +31,7 @@ classdef Password < mailspoon.internal.MailSpoonBase & dispstrlib.Displayable
     end
     
     function out = ismissing(this)
+      % True for missing value
       out = false(size(this));
       for i = 1:numel(this)
         out(i) = ismissing(this(i).str);

@@ -11,6 +11,25 @@ classdef util
       out = strjoin(strcat(indent, strsplit(str, '\n')), '\n');
     end
     
+    function out = stringifytable(tbl)
+      out = tbl;
+      for i = 1:width(tbl)
+        if iscellstr(tbl{:,i})
+          out.(tbl.Properties.VariableNames{i}) = string(tbl{:,i});
+        end
+      end
+    end
+    
+    function printInspectElement(fmt, indent, argsIn)
+      args = argsIn;
+      for i = 1:numel(args)
+        if isscalar(args{i}) && ismissing(args{i})
+          args{i} = "<missing>";
+        end
+      end
+      fprintf(indent + fmt + '\n', args{:});
+    end
+    
   end
   
 end
