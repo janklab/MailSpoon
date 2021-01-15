@@ -1,0 +1,21 @@
+body {
+	font-family: 'Arial';
+}
+table {
+	border-collapse: collapse;
+	border-color: lightgray;
+	box-shadow: 5px 5px 10px #1b9e9e;
+}
+th {
+	background: #22e2e2;
+	font-size: 14px;
+}
+td {
+	font-size: 12px;
+}
+td, th {
+	padding: 2px;
+}
+tbody tr:nth-child(odd) {
+	background: #ececf5
+}

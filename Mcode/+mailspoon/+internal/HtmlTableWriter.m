@@ -10,7 +10,6 @@ classdef HtmlTableWriter < mailspoon.internal.MailSpoonBaseHandle
   
   % Settings that control its behavior
   properties
-    
   end
   % State for when we're doing writing
   properties
@@ -110,6 +109,8 @@ classdef HtmlTableWriter < mailspoon.internal.MailSpoonBaseHandle
         out = htmlescape(string(x));
       elseif islogical(x)
         out = num2string(double(x));
+      elseif isdatetime(x)
+        out = htmlescape(string(cellstr(datestr(x))));
       else
         % TODO: whip out dispstrs() here
         error('Unsupported column type: %s', class(x));
