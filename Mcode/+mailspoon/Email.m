@@ -1,30 +1,37 @@
 classdef Email < mailspoon.internal.MailSpoonBaseHandle
   % Abstract base class for email messages
+  %
+  % This defines all the "envelope" information, like sender, recipients, 
+  % subject, and so on.
   
-  properties
+  properties (Hidden)
     % The underlying org.apache.commons.mail.Email object
     j
   end
   properties (Dependent)
+    % The email address of the sender
     from
+    % List of email addresses of the recipients
     to
+    % Mail subject line
     subject
+    % List of addresses to Cc the email to
     cc
+    % List of addresses to Bcc the email to
     bcc
+    % Reply-to address
     replyTo
+    % Address to contact in case of bounced emails (rarely used and little supported)
     bounceAddress
+    % Custom message headers, as a read-only containers.Map
     headers
+    % Date the message was created (not when it was actually sent through SMTP)
     sentDate
+    % Whether to allow partial sending when some of the To addresses are invalid
     isSendPartial
   end
   
   methods
-    
-    function setFrom(this, varargin)
-      narginchk(2,3)
-      addr = mailspoon.InternetAddress(varargin{:});
-      this.j.setFrom(addr.address, addr.personal);
-    end
     
     function out = get.from(this)
       out = mailspoon.InternetAddress(this.j.getFromAddress);
@@ -39,26 +46,27 @@ classdef Email < mailspoon.internal.MailSpoonBaseHandle
     end
     
     function set.to(this, to)
-      if ischar(to) || iscellstr(to) || isstring(to)
-        to = string(to);
+      arguments
+        this (1,1)
+        to mailspoon.InternetAddress
       end
-      to = mailspoon.InternetAddress(to);
-      jTo = java.util.ArrayList;
-      for i = 1:numel(to)
-        jTo.add(to(i).j);
-      end
-      this.j.setTo(jTo);
-    end
-    
-    function addTo(this, varargin)
-      this.j.addTo(varargin{:});
+      this.j.setTo(toJavaAddrList(to));
     end
     
     function out = get.cc(this)
       out = ofJavaAddrList(this.j.getCcAddresses);
     end
     
+    function set.cc(this, cc)
+      arguments
+        this (1,1)
+        cc mailspoon.InternetAddress
+      end
+      this.j.setTo(toJavaAddrList(cc));
+    end
+    
     function addCc(this, varargin)
+      % Add an address to the Cc list
       this.j.addCc(varargin{:});
     end
     
@@ -66,7 +74,16 @@ classdef Email < mailspoon.internal.MailSpoonBaseHandle
       out = ofJavaAddrList(this.j.getBccAddresses);
     end
     
+    function set.bcc(this, bcc)
+      arguments
+        this (1,1)
+        bcc mailspoon.InternetAddress
+      end
+      this.j.setTo(toJavaAddrList(bcc));
+    end
+    
     function addBcc(this, varargin)
+      % Add an address to the Bcc list
       this.j.addBcc(varargin{:});
     end
     
@@ -91,6 +108,7 @@ classdef Email < mailspoon.internal.MailSpoonBaseHandle
     end
     
     function addHeader(this, name, value)
+      % Add a custom header
       this.j.addHeader(name, value);
     end
     
@@ -103,6 +121,7 @@ classdef Email < mailspoon.internal.MailSpoonBaseHandle
     end
     
     function setDebug(this, debug)
+      % Turn debugging output on or off
       this.j.setDebug(debug);
     end
     
@@ -118,6 +137,7 @@ classdef Email < mailspoon.internal.MailSpoonBaseHandle
     end
     
     function inspect(this, indent)
+      % Print a debugging representation of this object
       arguments
         this (1,1)
         indent (1,1) string = ""
@@ -167,10 +187,21 @@ classdef Email < mailspoon.internal.MailSpoonBaseHandle
     end
     
     function out = send(this)
+      % Send this message
       out = mailspoon.MailHost.default.send(this);
       if nargout == 0
         clear out
       end
+    end
+    
+  end
+  
+  methods (Access=private)
+
+    function setFrom(this, varargin)
+      narginchk(2,3)
+      addr = mailspoon.InternetAddress(varargin{:});
+      this.j.setFrom(addr.address, addr.personal);
     end
     
   end
@@ -182,4 +213,12 @@ out = repmat(mailspoon.InternetAddress, [1 jaddrs.size]);
 for i = 1:jaddrs.size
   out(i) = jaddrs.get(i-1);
 end
+end
+
+function out = toJavaAddrList(addrs)
+jList = java.util.ArrayList;
+for i = 1:numel(addrs)
+  jList.add(addrs(i).j);
+end
+out = jList;
 end

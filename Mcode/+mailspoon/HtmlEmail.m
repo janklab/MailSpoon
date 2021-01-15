@@ -1,13 +1,22 @@
 classdef HtmlEmail < mailspoon.MultiPartEmail
   
   properties (Dependent)
+    % The main message content, as HTML
+    html
+    % The main message content, as plain text
+    text
   end
   
   methods
     
-    function this = HtmlEmail()
-      %this.j = org.apache.commons.mail.HtmlEmail;
+    function this = HtmlEmail(to, from)
       this.j = net.janklab.mailspoon.internal.DebuggableHtmlEmail;
+      if nargin >= 1
+        this.to = to;
+      end
+      if nargin >= 2
+        this.from = from;
+      end
     end
     
     function cid = embed(this, thing)
@@ -16,7 +25,10 @@ classdef HtmlEmail < mailspoon.MultiPartEmail
       % The thing may be:
       %   - a string containing a file name
       %   - a figure handle
-      %   -
+      %
+      % Note that if you embed a file, you must leave that file in place until
+      % the message is actually sent, or you'll get an error. The files are read
+      % at message send time, not message construction time.
       %
       % Returns the generated CID as a string.
       arguments
@@ -34,6 +46,9 @@ classdef HtmlEmail < mailspoon.MultiPartEmail
     end
     
     function cid = embedFromUrl(this, url, name)
+      % Embed a thing from a URL source
+      %
+      % Returns the generated CID as a string.
       arguments
         this
         url (1,1)
@@ -46,6 +61,17 @@ classdef HtmlEmail < mailspoon.MultiPartEmail
     end
     
     function cid = embedFigure(this, fig, filename)
+      % Embed an image from a Matlab figure window
+      %
+      % cid = embedFigure(this, fig, filename)
+      %
+      % fig is a Matlab figure handle.
+      %
+      % filename (optional) is a file basename to use for the figure. This will
+      % affect the default name that the image is saved as if the recipient
+      % right-clicks on the image and does a "Save As..." in their email client.
+      %
+      % Returns the generated CID as a string.
       arguments
         this
         fig
@@ -69,15 +95,26 @@ classdef HtmlEmail < mailspoon.MultiPartEmail
       cid = this.embed(filepath);
     end
     
+    function set.html(this, html)
+      this.setHtmlMsg(html);
+    end
+    
     function setHtmlMsg(this, html)
+      % Set the HTML-format message contents
       this.j.setHtmlMsg(html);
     end
     
+    function set.text(this, text)
+      this.setTextMsg(text);
+    end
+    
     function setTextMsg(this, text)
+      % Set the plain-text-format message contents
       this.j.setTextMsg(text);
     end
     
     function inspect(this, indent)
+      % Print a debugging representation of this object
       arguments
         this (1,1)
         indent (1,1) string = ""

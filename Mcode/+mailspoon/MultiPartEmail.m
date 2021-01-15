@@ -1,4 +1,5 @@
 classdef MultiPartEmail < mailspoon.Email
+  % A MIME MultiPart email message
   
   properties (Dependent)
   end
@@ -10,6 +11,7 @@ classdef MultiPartEmail < mailspoon.Email
     end
     
     function attach(this, file)
+      % Attach a file to this message
       arguments
         this (1,1)
         file (1,1) string
@@ -18,6 +20,7 @@ classdef MultiPartEmail < mailspoon.Email
     end
     
     function attachUrl(this, url, name, description, disposition)
+      % Attach a file drawn from a URL to this message
       arguments
         this (1,1)
         url (1,1) 
@@ -40,6 +43,7 @@ classdef MultiPartEmail < mailspoon.Email
     end
     
     function inspect(this, indent)
+      % Print a debugging representation of this object
       arguments
         this (1,1)
         indent (1,1) string = ""

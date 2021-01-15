@@ -12,6 +12,10 @@ classdef SmtpHost < mailspoon.internal.MailSpoonBaseHandle
     port (1,1) double = NaN
     sslPort (1,1) double = NaN
   end
+  properties (Hidden)
+    DEBUG_force_from (1,1) string
+    DEBUG_force_to string = []
+  end
   
   methods
     
@@ -59,6 +63,14 @@ classdef SmtpHost < mailspoon.internal.MailSpoonBaseHandle
         this (1,1)
         message (1,1) mailspoon.Email
       end
+      % Debugging stuff
+      if ~ismissing(this.DEBUG_force_from)
+        message.from = this.DEBUG_force_from;
+      end
+      if ~isempty(this.DEBUG_force_to)
+        message.to = this.DEBUG_force_to;
+      end
+      % Main stuff
       jmail = message.j;
       server = this.getHost;
       if ~ismissing(server)
@@ -76,6 +88,7 @@ classdef SmtpHost < mailspoon.internal.MailSpoonBaseHandle
       if ~isnan(this.sslPort)
         jmail.setSslSmtpPort(""+this.sslPort);
       end
+        
       out = string(jmail.send);
     end
     
