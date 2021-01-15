@@ -1,4 +1,5 @@
 classdef libinfo
+  % Information about the MailSpoon library
   
   properties (Constant)
     % Path to the root directory of this MailSpoon distribution
@@ -8,6 +9,8 @@ classdef libinfo
   methods (Static)
     
     function out = version
+      %
+      % Returns a string.
       persistent val
       if isempty(val)
         versionFile = fullfile(mailspoon.libinfo.distroot, 'VERSION');

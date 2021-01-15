@@ -5,14 +5,19 @@ classdef InternetAddress < mailspoon.internal.MailSpoonBaseHandle & dispstrlib.D
   %
   %   RFC822 - https://www.ietf.org/rfc/rfc822.txt
   
-  properties (SetAccess = private)
+  properties (Hidden, SetAccess = private)
     j
   end
   properties (Dependent)
+    % The email address part of the address
     address
+    % The personal ("human"/"friendly") name part of the address
     personal
+    % Encoded version of personal
     encodedPersonal
+    % Whether this is a group (rarely used)
     isGroup
+    % The type of address (related to encoding)
     type
   end
   
@@ -76,6 +81,7 @@ classdef InternetAddress < mailspoon.internal.MailSpoonBaseHandle & dispstrlib.D
     end
     
     function out = string(this)
+      % Convert to a string array
       out = repmat(string(missing), size(this));
       for i = 1:numel(this)
         out(i) = this(i).j.toString;
@@ -83,6 +89,7 @@ classdef InternetAddress < mailspoon.internal.MailSpoonBaseHandle & dispstrlib.D
     end
     
     function validate(this)
+      % Check that this address is valid, as defined in RFC822
       for i = 1:numel(this)
         try
           this(i).j.validate;

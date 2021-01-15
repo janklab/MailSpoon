@@ -1,31 +1,26 @@
 function mustBeA(value, type)
-%MUSTBEA Validate that an input is of a particular data type
+% Validate that an input is of a particular data type
 %
-% MUSTBEA(value, type)
+% mustBeA(value, type)
 %
 % Validates that the input Value is of the specified Type or a
-% subtype. If Value is not of Type, an error is raised. If Value is
-% of Type, does nothing and returns.
+% subtype. If Value is not of Type (according to Matlab's isa() function), an
+% error is raised. If Value is of Type, does nothing and returns.
 %
 % Value is the value to validates the type of. It may be anything. If
 % you call it using a variable (as opposed to a longer expression),
 % the variable name is included in any error messages.
 %
-% Type (char) is the name of the type that Value must be. A type
-% name may be one of:
-%   * A class, such as 'double', 'cell', or 'containers.Map'
-%   * A Janklab pseudotype, such as 'cellstr' or 'numeric'
-%
-% Note: The cellstr pseudotype is nontrivial to check for, as it
-% must call iscellstr() and check all cell contents. Avoid calling it in
-% perforamce-critical code.
+% Type (char) is the name of the type that Value must be. It may be:
+%   - the name of a Matlab type
+%   - 'cellstr', 'numeric', or 'object' (Janklab pseudotypes)
+%   - 'any', which allows anything and always passes
 
 % Avoid infinite recursion
 assert(ischar(type), 'jl:InvalidInput',...
     'type must be a char, but got a %s', class(type));
 
 % Special pseudotype cases
-% TODO: These can probably go away now that we're using isa2()
 switch type
     case 'cellstr'
         if iscellstr(value) %#ok<ISCLSTR>
@@ -71,4 +66,7 @@ end
 
 end
 
+function reportBadValue(label, want, got)
+error('jl:InvalidInput', 'Input %s must be a %s, but got a %s', label, want, got);
+end
 

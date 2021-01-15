@@ -1,17 +1,23 @@
 classdef SmtpHost < mailspoon.internal.MailSpoonBaseHandle
-  % Knows how to actually send messages via SMTP
+  % Configuration info for an SMTP server
   
   % TODO: Define a way of storing these settings in a config file or other
   % system setting.
   
   properties
+    % Hostname of the SMTP server
     host (1,1) string
+    % Username to log in to the SMTP server with
     username (1,1) string
+    % Whether to use SSL when connecting
     useSsl (1,1) logical = false
+    % Port for non-SSL connections
     port (1,1) double = NaN
+    % Port for SSL connections
     sslPort (1,1) double = NaN
   end
   properties (GetAccess=private)
+    % Password for the SMTP server account
     password (1,1) string
   end
   properties (Hidden)
@@ -61,6 +67,10 @@ classdef SmtpHost < mailspoon.internal.MailSpoonBaseHandle
     end
     
     function out = send(this, message)
+      % Send an email message
+      %
+      % This is generally for MailSpoon's internal use. You should just call
+      % send() on your email message object itself.
       arguments
         this (1,1)
         message (1,1) mailspoon.Email
