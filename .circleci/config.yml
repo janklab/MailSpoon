@@ -1,0 +1,20 @@
+version: 2.1
+orbs:
+  matlab: mathworks/matlab@0.3.1
+  # Declare a dependency on the welcome-orb
+  welcome: circleci/welcome-orb@0.4.1
+workflows:
+  runtests:
+    # Run the welcome/run job in its own container
+    jobs:
+      build:
+        machine:
+          image: 'ubuntu-1604:201903-01'
+        steps:
+          - checkout
+          - matlab/install
+          - matlab/run-tests:
+              test-results-junit: test-results/matlab/results.xml
+          - store_test_results:
+              path: test-results
+

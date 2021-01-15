@@ -7,7 +7,9 @@
 * Header-set object
 * Unit tests
 * Matlab CI
-
+  * Set up Azure Pipelines
+  * Set up CircleCI
+  
 ## Content stuff
 
 * Control over resolution/size of images saved from figures
@@ -15,12 +17,11 @@
 
 ## HTML generation
 
-HTML tables from:
-
-* numeric matrix
-* cell array
-
+* HTML tables from:
+  * numeric matrix
+  * cell array
 * Builder that takes mixed-content-type cell arrays and strings their htmlifications together
+* Use the `InlineHtmlEmail` class from Commons Email
 
 ## Authentication and configuration stuff
 
