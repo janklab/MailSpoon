@@ -21,21 +21,42 @@ plot(x, y);
 fig2_cid = e.embedFigurePrint(fig, 'Some Lines.png');
 close(fig);
 
+fig = quiver3d;
+fig3_cid = e.embedFigurePrint(fig, 'Quiver Plot.png');
+close(fig);
+
 file = fullfile(mailspoon.libinfo.distroot, 'examples', 'Brooklyn.jpg');
 file_cid = e.embed(file);
+
+tbl = sampledata.cereal;
+tableHtml = mailspoon.htmlify(tbl(1:5,:));
+
+css = mailspoon.internal.Common.CssStyles.teal;
+% Flexbox
+css = css + sprintf(strjoin({
+  ''
+  '.imgs_row { display: flex }  .imgs_col { flex: 50%%; padding: 5px; }'
+  }));
 
 % Then create your HTML using those cids
 
 e.html = sprintf(strjoin({
   '<html>'
+  '<head>'
+  '  <style>%s</style>'
+  '</head>'
   '<body>'
   '<h1>Hello, World!</h1>'
   ''
-  '<h2>Matlab Figures</h2>'
-  '<table border=0><tr>'
-  '<td><img src=cid:%s></td>'
-  '<td><img src=cid:%s></td>'
-  '</tr></table>'
+  '<h2>Matlab Figures</h2>'  
+  '<div class="imgs_row">'
+  '  <div class="imgs_col"><img src=cid:%s style="width:100%%"></div>'
+  '  <div class="imgs_col"><img src=cid:%s style="width:100%%"></div>'
+  '  <div class="imgs_col"><img src=cid:%s style="width:100%%"></div>'
+  '</div>'
+  ''
+  '<h2>A Table</h2>'
+  '%s'
   ''
   '<h2>An Image File</h2>'
   '<img src=cid:%s>'
@@ -46,8 +67,28 @@ e.html = sprintf(strjoin({
   ''
   '</html>'
   '</body>'
-  }, '\n'), fig_cid, fig2_cid, file_cid);
+  }, '\n'), css, fig_cid, fig2_cid, fig3_cid, tableHtml, file_cid);
 
 e.send
 
 end
+
+function out = quiver3d
+% Create a grid of x,y, and z values
+[x, y, z] = meshgrid(-0.8:0.2:0.8, -0.8:0.2:0.8, -0.8:0.8:0.8);
+% Calculate homogenous turbulence values at each (x,y,z)
+u = sin(pi*x).*cos(pi*y).*cos(pi*z);
+v = -cos(pi*x).*sin(pi*y).*cos(pi*z);
+w = sqrt(2/3)*cos(pi*x).*cos(pi*y).*sin(pi*z);
+% Draw a 3 dimensional quiver plot using the quiver3 function
+out = figure('Visible','off');
+quiver3(x, y, z, u, v, z)
+% Set the axis limits
+axis([-1 1 -1 1 -1 1])
+% Add title and axis labels
+title('Turbulence Values')
+xlabel('x')
+ylabel('x')
+zlabel('z')
+end
+
