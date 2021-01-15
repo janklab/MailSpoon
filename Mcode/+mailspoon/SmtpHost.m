@@ -7,13 +7,15 @@ classdef SmtpHost < mailspoon.internal.MailSpoonBaseHandle
   properties
     host (1,1) string
     username (1,1) string
-    password (1,1) string
     useSsl (1,1) logical = false
     port (1,1) double = NaN
     sslPort (1,1) double = NaN
   end
+  properties (GetAccess=private)
+    password (1,1) string
+  end
   properties (Hidden)
-    DEBUG_force_from (1,1) string
+    DEBUG_force_from (1,1) string = missing
     DEBUG_force_to string = []
   end
   

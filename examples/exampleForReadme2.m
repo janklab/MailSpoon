@@ -10,7 +10,7 @@ surf(peaks);
 fig_cid = e.embed(fig);
 close(fig);
 
-file = fullfile(mailspoon.libinfo.distroot, 'scratch', 'Brooklyn.jpg');
+file = fullfile(mailspoon.libinfo.distroot, 'examples', 'Brooklyn.jpg');
 file_cid = e.embed(file);
 
 % Then create your HTML using those cids

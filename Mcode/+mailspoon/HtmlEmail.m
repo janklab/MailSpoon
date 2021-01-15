@@ -6,16 +6,34 @@ classdef HtmlEmail < mailspoon.MultiPartEmail
     % The main message content, as plain text
     text
   end
+  properties (Hidden)
+    DEBUG_preserveTempdir (1,1) logical = false
+  end
+  properties (Access=private)
+    tempDir (1,1) string = [tempname '-MailSpoon.d'];
+    counter (1,1) = 1
+  end
   
   methods
     
     function this = HtmlEmail(to, from)
+      % Create a new HtmlEmail object
       this.j = net.janklab.mailspoon.internal.DebuggableHtmlEmail;
       if nargin >= 1
         this.to = to;
       end
       if nargin >= 2
         this.from = from;
+      end
+      % TODO: lazy-create the temp dir on first actual usage
+      mkdir(this.tempDir);
+    end
+    
+    function delete(this)
+      if ~this.DEBUG_preserveTempdir
+        if isfolder(this.tempDir)
+          [ok,msg,msgid] = rmdir(this.tempDir, 's'); %#ok<ASGLU>
+        end
       end
     end
     
@@ -60,6 +78,38 @@ classdef HtmlEmail < mailspoon.MultiPartEmail
       cid = string(this.j.embed(url, name));
     end
     
+    function cid = embedFigurePrint(this, fig, filename, formattype, opts)
+      % Advanced figure embedding using Matlab's print function
+      arguments
+        this
+        fig
+        filename (1,1) string
+        formattype (1,1) string = missing
+        opts cell = {}
+      end
+      if ismissing(filename)
+        filename = sprintf("Plot %d.png", this.nextCounter);
+      end
+      if ismissing(formattype)
+        [~,~,fext] = fileparts(char(filename));
+        fext(1) = [];
+        switch lower(fext)
+          case 'png';           fmt = 'png';
+          case {'jpg' 'jpeg'};  fmt = 'jpeg';
+          case 'tif';           fmt = 'tiff';
+          case 'emf';           fmt = 'meta';
+          case 'bmp';           fmt = 'bmp';
+          case 'pcx';           fmt = 'pcx256';
+          case 'pdf';           fmt = 'pdf';
+          case 'svg';           fmt = 'svg';
+          otherwise;            error('Could not guess image file format type for file %s', filename)
+        end
+        formattype = fmt;
+      end
+      print(fig, filename, ['-d' formattype], opts{:});
+      cid = this.embed(string(filename));
+    end
+    
     function cid = embedFigure(this, fig, filename)
       % Embed an image from a Matlab figure window
       %
@@ -77,21 +127,11 @@ classdef HtmlEmail < mailspoon.MultiPartEmail
         fig
         filename (1,1) string = missing
       end
-      persistent counter
-      if isempty(counter)
-        counter = 1;
-      end
       if ismissing(filename)
-        filename = sprintf("Plot %d.png", counter);
-        counter = counter + 1;
+        filename = sprintf("Plot %d.png", this.nextCounter);
       end
-      tdir = [tempname '.d'];
-      mkdir(tdir);
-      filepath = fullfile(tdir, filename);
+      filepath = fullfile(this.tempDir, filename);
       saveas(fig, filepath);
-      % We can't actually delete it, because Commons Email reads it at message
-      % send time, not at embed time
-      %RAII.file = onCleanup(@() delete(filepath));
       cid = this.embed(filepath);
     end
     
@@ -129,6 +169,10 @@ classdef HtmlEmail < mailspoon.MultiPartEmail
   
   methods (Access=protected)
     
+    function out = nextCounter(this)
+      out = this.counter;
+      this.counter = this.counter + 1;
+    end
     
   end
   

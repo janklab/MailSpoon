@@ -1,6 +1,6 @@
 # MailSpoon
 
-Sophisticated HTML and MIME email for Matlab
+Sophisticated HTML and MIME email generation for Matlab.
 
 ## About
 
@@ -91,6 +91,10 @@ e.html = sprintf(strjoin({
 
 e.send
 ```
+
+If all goes well, you'll soon be sending emails that look like this!
+
+![Screenshot of MailSpoon email message](examples/MailSpoon-message-screenshot.png)
 
 ### SMTP server configuration
 
