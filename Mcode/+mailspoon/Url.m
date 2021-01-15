@@ -4,6 +4,8 @@ classdef Url < mailspoon.internal.MailSpoonBase & dispstrlib.Displayable
   % Technically, this represents a URI which could be either a URL or URN, but
   % nobody cares about that distinction
   
+  % TODO: This should probably wrap java.net.URI instead of java.net.URL
+  
   properties (SetAccess=private, Hidden)
     j
   end
