@@ -113,8 +113,6 @@ For settings that you don't configure in `mailspoon.MailHost`, MailSpoon will fa
 
 Configuring `mailspoon.MailHost.default` is local to the Matlab session, and does not cause the Matlab preferences file to be updated, the way `setpref('Internet')` does. This makes it suitable for use in automated processes on the server side.
 
-TODO: Document how to work with StartTLS.
-
 ### Debugging
 
 If you want to see debugging dumps of the internals of the objects, call `inspect()` on them.
