@@ -1,0 +1,12 @@
+pool:
+  vmImage: 'Ubuntu 18.04'
+steps:
+  - script: git clone https://github.com/janklab/MailSpoon
+  - script: matlab -batch "addpath Mcode-testharness; launchtests"
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: test-output/**/*.xml
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: test-output/cobertura/coverage.xml
+  

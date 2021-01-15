@@ -1,0 +1,3 @@
+language: matlab
+script: matlab -batch "addpath Mcode-testharness; launchtests"
+after_script: bash <(curl -s https://codecov.io/bash)

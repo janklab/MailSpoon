@@ -1,10 +1,12 @@
 # MailSpoon TODO
 
-## Coding tools
+## Coding stuff
 
 * `fff` string interpolation
 * Logging
 * Header-set object
+* Unit tests
+* Matlab CI
 
 ## Content stuff
 
