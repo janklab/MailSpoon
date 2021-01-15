@@ -111,8 +111,9 @@ classdef HtmlEmail < mailspoon.MultiPartEmail
         end
         formattype = fmt;
       end
-      print(fig, filename, ['-d' formattype], opts{:});
-      cid = this.embed(string(filename));
+      filepath = fullfile(this.tempDir, filename);
+      print(fig, filepath, ['-d' formattype], opts{:});
+      cid = this.embed(string(filepath));
     end
     
     function cid = embedFigure(this, fig, filename)
