@@ -15,10 +15,8 @@ classdef SmtpHost < mailspoon.internal.MailSpoonBaseHandle
     port (1,1) double = NaN
     % Port for SSL connections
     sslPort (1,1) double = NaN
-  end
-  properties (GetAccess=private)
     % Password for the SMTP server account
-    password (1,1) string
+    password (1,1) mailspoon.internal.Password = missing
   end
   properties (Hidden)
     DEBUG_force_from (1,1) string = missing
@@ -60,10 +58,7 @@ classdef SmtpHost < mailspoon.internal.MailSpoonBaseHandle
     
     function out = getPassword(this)
       % Effective SMTP password
-      out = string(missing);
-      if ~ismissing(this.password)
-        out = this.password;
-      end
+      out = this.password;
     end
     
     function out = send(this, message)
@@ -89,9 +84,9 @@ classdef SmtpHost < mailspoon.internal.MailSpoonBaseHandle
         jmail.setHostName(server);
       end
       myuser = this.getUsername;
-      mypass = this.getPassword;
+      mypass = this.getPassword.getActualPassword;
       if ~ismissing(myuser) || ~ismissing(mypass)
-        jmail.setAuthentication(this.username, this.password);
+        jmail.setAuthentication(myuser, mypass);
       end
       jmail.setSSLOnConnect(this.useSsl);
       if ~isnan(this.port)
@@ -102,6 +97,18 @@ classdef SmtpHost < mailspoon.internal.MailSpoonBaseHandle
       end
         
       out = string(jmail.send);
+    end
+    
+    function inspect(this, indent)
+      % Print a debugging representation of this object
+      arguments
+        this (1,1)
+        indent (1,1) string = ""
+      end
+      function p(fmt, varargin)
+        fprintf(indent + fmt + '\n', varargin{:});
+      end
+      disp(this);
     end
     
   end

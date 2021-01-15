@@ -41,6 +41,7 @@ classdef MailSpoonInit
         setappdata(0, 'mailspoon', s);
 
         fprintf('MailSpoon %s initialized\n', mailspoon.libinfo.version);
+        fprintf('This is prerelease, alpha-quality software! It may be buggy!\n');
       end
       
     end

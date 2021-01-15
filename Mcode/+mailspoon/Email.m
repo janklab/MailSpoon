@@ -188,7 +188,7 @@ classdef Email < mailspoon.internal.MailSpoonBaseHandle
     
     function out = send(this)
       % Send this message
-      out = mailspoon.MailHost.default.send(this);
+      out = mailspoon.globals.smtpHost.send(this);
       if nargout == 0
         clear out
       end
