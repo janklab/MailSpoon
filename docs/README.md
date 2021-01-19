@@ -1,6 +1,6 @@
-# doc-src
+# docs/
 
-This directory contains stuff for generating the project documentation using Jekyll, a static site generator that uses Markdown.
+This directory contains stuff for generating the project documentation using Jekyll, a static site generator that uses Markdown. It is compatible with GitHub Pages.
 
 ## Requirements
 
