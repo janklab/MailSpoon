@@ -3,6 +3,7 @@
 ## Documentation and branding
 
 * How to incorporate the `examples/` into the Jekyll docs?
+* Get themes working on GitHub Pages
 
 ## Coding stuff
 
