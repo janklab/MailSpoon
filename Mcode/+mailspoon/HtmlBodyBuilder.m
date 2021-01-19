@@ -188,9 +188,11 @@ classdef HtmlBodyBuilder < mailspoon.internal.MailSpoonBaseHandle
     
     function out = mailspoonAd(this) %#ok<MANU>
       out = strjoin({
+        '<div style="float: right">'
         '<p>Powered by '
         '<a href="http://github.com/janklab/MailSpoon"><b>MailSpoon</b></a> '
         'for MATLAB®.</p>'
+        '</div>'
         }, '');
     end
     
