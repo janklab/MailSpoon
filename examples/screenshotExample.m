@@ -25,7 +25,7 @@ fig = quiver3d;
 fig3_cid = e.embedFigurePrint(fig, 'Quiver Plot.png');
 close(fig);
 
-file = fullfile(mailspoon.libinfo.distroot, 'examples', 'Brooklyn.jpg');
+file = fullfile(mailspoon.globals.distroot, 'examples', 'Brooklyn.jpg');
 file_cid = e.embed(file);
 
 tbl = sampledata.cereal;
