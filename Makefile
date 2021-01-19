@@ -14,7 +14,7 @@
 PROGRAM=MailSpoon
 VERSION=$(shell cat VERSION)
 DIST=dist/${PROGRAM}-${VERSION}
-DISTFILES=build/Mcode docs lib examples README.md LICENSE CHANGES.txt
+DISTFILES=build/Mcode doc lib examples README.md LICENSE CHANGES.txt
 
 .PHONY: test
 test:
@@ -26,7 +26,7 @@ build:
 
 .PHONY: doc
 doc:
-	cd doc-src && ./make_doc
+	cd docs && ./make_doc
 .PHONY: m-doc
 m-doc: doc
 	rm -rf build/M-doc
@@ -53,4 +53,4 @@ java:
 
 .PHONY: clean
 clean:
-	rm -rf dist/* build doc-src/site doc-src/_site M-doc
+	rm -rf dist/* build docs/site docs/_site M-doc
