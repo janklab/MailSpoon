@@ -2,7 +2,7 @@ title: MailSpoon Documentation
 email: andrew.net
 description: Documentation for MailSpoon
 
-baseurl: ""
+baseurl: "/"
 url: ""
 
 github_username: janklab
