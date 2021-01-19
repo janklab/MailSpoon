@@ -1,7 +1,7 @@
 ---
 layout: default
 ---
-# MailSpoon Documentation
+# MailSpoon
 
 Sophisticated HTML and MIME email generation for Matlab.
 
@@ -21,7 +21,7 @@ MailSpoon is written in a modern Matlab style. It's my goal to make MailSpoon an
 
 To install MailSpoon:
 
-* Download the MailSpoon repo.
+* Download the MailSpoon [repo](https://github.com/janklab/MailSpoon).
 * Add its `Mcode` directory to your Matlab path using `addpath()`.
 
 ## Usage
@@ -153,4 +153,4 @@ The project home page is the repo page on GitHub at <https://github.com/janklab/
 
 MailSpoon is part of the [Janklab](https://github.com/janklab) suite of libraries for Matlab.
 
-Thanks to [BAND-MAID](https://www.youtube.com/channel/UCJToUvYrmkmTCR-bluEaQfA) and [Lovebites](https://www.facebook.com/LovebitesTheBand/) for powering my coding.
+Thank you to [BAND-MAID](https://www.youtube.com/channel/UCJToUvYrmkmTCR-bluEaQfA) and [Lovebites](https://www.facebook.com/LovebitesTheBand/) for powering my coding.
