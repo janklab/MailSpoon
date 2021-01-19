@@ -138,6 +138,10 @@ If you want to see debugging dumps of the internals of the objects, call `inspec
 e.inspect
 ```
 
+## More info
+
+See the full docs live on [the MailSpoon website](https://mailspoon.janklab.net), or in the `docs/` directory of the distribution.
+
 ## Technology
 
 MailSpoon is built on top of [Apache Commons Email](https://commons.apache.org/proper/commons-email/) and [JavaMail/`javax.mail`](https://javaee.github.io/javamail/).
@@ -146,8 +150,8 @@ MailSpoon is built on top of [Apache Commons Email](https://commons.apache.org/p
 
 MailSpoon was written by [Andrew Janke](https://apjanke.net).
 
-The project home page is the repo page on GitHub at <https://github.com/janklab/MailSpoon>. Bug reports and feature requests are welcome.
+The project home page is the [GitHub repo page](https://github.com/janklab/MailSpoon). Bug reports and feature requests are welcome.
 
-MailSpoon is part of the [Janklab](https://github.com/janklab) suite of libraries for Matlab.
+MailSpoon is part of the [Janklab](https://janklab.net) suite of libraries for Matlab.
 
 Thanks to [BAND-MAID](https://www.youtube.com/channel/UCJToUvYrmkmTCR-bluEaQfA) and [Lovebites](https://www.facebook.com/LovebitesTheBand/) for powering my coding.

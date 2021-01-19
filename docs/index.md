@@ -149,7 +149,7 @@ MailSpoon is built on top of [Apache Commons Email](https://commons.apache.org/p
 
 MailSpoon was written by [Andrew Janke](https://apjanke.net).
 
-The project home page is the repo page on GitHub at <https://github.com/janklab/MailSpoon>. Bug reports and feature requests are welcome.
+The project home page is the [GitHub repo page](https://github.com/janklab/MailSpoon). Bug reports and feature requests are welcome.
 
 MailSpoon is part of the [Janklab](https://janklab.net) suite of libraries for Matlab.
 
