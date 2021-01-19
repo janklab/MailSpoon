@@ -30,6 +30,13 @@ classdef util
       fprintf(indent + fmt + '\n', args{:});
     end
     
+    function mkdir(dir)
+        [ok,msg,msgid] = mkdir(dir);
+        if ~ok
+            error('Failed creating directory "%s": %s', dir, msg);
+        end
+    end
+    
   end
   
 end

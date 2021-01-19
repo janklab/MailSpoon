@@ -18,6 +18,10 @@ classdef CssStyles
       out = mailspoon.internal.readtext(cssFile);
     end
     
+    function out = getDefaultStyle(this)
+      out = this.getStyle(mailspoon.globals.settings.defaultCssTheme);
+    end
+    
     function out = stylesDir(this)
       myDir = fileparts(mfilename('fullpath'));
       out = fullfile(myDir, 'resources', 'css-styles');

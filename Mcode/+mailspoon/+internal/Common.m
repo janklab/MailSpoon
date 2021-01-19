@@ -1,7 +1,7 @@
 classdef Common
   
   properties (Constant)
-    CssStyles = mailspoon.internal.CssStyles
+    cssStyles = mailspoon.internal.CssStyles
   end
   
 end

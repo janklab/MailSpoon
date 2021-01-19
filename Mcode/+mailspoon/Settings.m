@@ -1,6 +1,8 @@
 classdef Settings < mailspoon.internal.MailSpoonBaseHandle
   
   properties
+    % The default CSS theme to use for generated HTML
+    defaultCssTheme (1,1) string = "teal"
   end
   
   methods
@@ -15,6 +17,13 @@ classdef Settings < mailspoon.internal.MailSpoonBaseHandle
         fprintf(indent + fmt + '\n', varargin{:});
       end
       disp(this);
+    end
+    
+    function set.defaultCssTheme(this, newTheme)
+      % Setter for defaultCssTheme
+      
+      % TODO: Validate that newTheme is a defined theme
+      this.defaultCssTheme = newTheme;
     end
 
   end

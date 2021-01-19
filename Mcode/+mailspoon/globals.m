@@ -5,7 +5,7 @@ classdef globals < mailspoon.internal.MailSpoonBase
     % SMTP host and account settings
     smtpHost = mailspoon.SmtpHost
     % Miscellaneous settings
-    settings = mailspoon.internal.Settings
+    settings = mailspoon.Settings
   end
   
   methods (Static)

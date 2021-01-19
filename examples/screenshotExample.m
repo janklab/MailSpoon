@@ -31,11 +31,11 @@ file_cid = e.embed(file);
 tbl = sampledata.cereal;
 tableHtml = mailspoon.htmlify(tbl(1:5,:));
 
-css = mailspoon.internal.Common.CssStyles.teal;
+css = mailspoon.internal.Common.cssStyles.teal;
 % Flexbox
 css = css + sprintf(strjoin({
   ''
-  '.imgs_row { display: flex }  .imgs_col { flex: 50%%; padding: 5px; }'
+  '.grid_row { display: flex }  .grid_col_3 { flex: 33%%; padding: 5px; }'
   }));
 
 % Then create your HTML using those cids
@@ -49,10 +49,10 @@ e.html = sprintf(strjoin({
   '<h1>Hello, World!</h1>'
   ''
   '<h2>Matlab Figures</h2>'  
-  '<div class="imgs_row">'
-  '  <div class="imgs_col"><img src=cid:%s style="width:100%%"></div>'
-  '  <div class="imgs_col"><img src=cid:%s style="width:100%%"></div>'
-  '  <div class="imgs_col"><img src=cid:%s style="width:100%%"></div>'
+  '<div class="grid_row">'
+  '  <div class="grid_col_3"><img src=cid:%s style="width:100%%"></div>'
+  '  <div class="grid_col_3"><img src=cid:%s style="width:100%%"></div>'
+  '  <div class="grid_col_3"><img src=cid:%s style="width:100%%"></div>'
   '</div>'
   ''
   '<h2>A Table</h2>'

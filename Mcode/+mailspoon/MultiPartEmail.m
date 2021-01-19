@@ -12,11 +12,17 @@ classdef MultiPartEmail < mailspoon.Email
     
     function attach(this, file)
       % Attach a file to this message
+      %
+      % attach(this, file)
+      %
+      % File (string) is the path to a file or files to attach.
       arguments
         this (1,1)
-        file (1,1) string
+        file string
       end
-      this.j.attach(java.io.File(file));
+      for i = 1:numel(file);
+        this.j.attach(java.io.File(file(i)));
+      end
     end
     
     function attachUrl(this, url, name, description, disposition)

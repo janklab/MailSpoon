@@ -32,12 +32,11 @@ classdef HtmlEmail < mailspoon.MultiPartEmail
     function delete(this)
       if ~this.DEBUG_preserveTempdir
         try
-          if isfolder(this.tempDir)          
+          if isfolder(this.tempDir)
             [ok,msg,msgid] = rmdir(this.tempDir, 's'); %#ok<ASGLU>
           end
-        catch err
-          fprintf('ERROR: failed deleting temp folder. Dropping into debugger.\n');
-          keyboard
+        catch err %#ok<NASGU>
+          % quash
         end
       end
     end

@@ -9,6 +9,7 @@ classdef libinfo
   methods (Static)
     
     function out = version
+      % The version of the MailSpoon library
       %
       % Returns a string.
       persistent val
