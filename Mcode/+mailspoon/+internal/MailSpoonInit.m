@@ -11,7 +11,7 @@ classdef MailSpoonInit
         % MailSpoon class.
         
         ad = getappdata(0, 'mailspoon');
-        if ~isempty(ad)
+        if ~isempty(ad) && isfield(ad, 'initialized') && ad.initialized
           % Lib is already initialized
           return
         end
@@ -39,7 +39,8 @@ classdef MailSpoonInit
         
         % Record initialization
         s.initialized = true;
-        setappdata(0, 'mailspoon', s);
+        mailspoon.internal.util.setpackageappdata('initialized', true);
+
 
         fprintf('MailSpoon %s initialized\n', libVersion(distroot));
         fprintf('This is prerelease, alpha-quality software! It may be buggy!\n');

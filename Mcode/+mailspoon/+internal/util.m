@@ -44,6 +44,27 @@ classdef util
       end
     end
     
+    function out = getpackageappdata(key)
+      ad = getappdata(0, 'mailspoon');
+      if isempty(ad)
+        ad = struct;
+      end
+      if isfield(ad, key)
+        out = ad.(key);
+      else
+        out = [];
+      end
+    end
+    
+    function setpackageappdata(key, value)
+      ad = getappdata(0, 'mailspoon');
+      if isempty(ad)
+        ad = struct;
+      end
+      ad.(key) = value;
+      setappdata(0, 'mailspoon', ad);
+    end
+    
   end
   
 end

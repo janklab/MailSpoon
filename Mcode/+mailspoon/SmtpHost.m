@@ -23,6 +23,14 @@ classdef SmtpHost < mailspoon.internal.MailSpoonBaseHandle
     DEBUG_force_to string = []
   end
   
+  methods (Static)
+    
+    function out = discover()
+      out = mailspoon.SmtpHost;
+    end
+    
+  end
+  
   methods
     
     function out = getHost(this)

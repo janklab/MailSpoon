@@ -5,9 +5,9 @@ classdef globals < mailspoon.internal.MailSpoonBase
     % Path to the root directory of this MailSpoon distribution
     distroot = string(fileparts(fileparts(fileparts(mfilename('fullpath')))));
     % SMTP host and account settings
-    smtpHost = mailspoon.SmtpHost
+    smtpHost = mailspoon.SmtpHost.discover
     % Miscellaneous settings
-    settings = mailspoon.Settings
+    settings = mailspoon.Settings.discover
   end
   
   methods (Static)

@@ -5,6 +5,17 @@ classdef Settings < mailspoon.internal.MailSpoonBaseHandle
     defaultCssTheme (1,1) string = "teal"
   end
   
+  methods (Static)
+    
+    function out = discover()
+      % Discover the initial settings for this package
+      
+      % TODO: Config file, env vars, and getpref('Internet')
+      out = mailspoon.Settings;
+    end
+    
+  end
+  
   methods
     
     function inspect(this, indent)
