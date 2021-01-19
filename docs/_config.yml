@@ -20,7 +20,7 @@ exclude:
   - make_doc
 
 markdown: kramdown
-theme: jekyll-theme-slate
+theme: jekyll-theme-cayman
 highlighter: rouge
 kramdown:
   syntax_highlighter_opts:

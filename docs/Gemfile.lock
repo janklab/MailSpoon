@@ -49,6 +49,9 @@ GEM
       jekyll (>= 3.8, < 5.0)
     jekyll-sitemap (1.4.0)
       jekyll (>= 3.7, < 5.0)
+    jekyll-theme-cayman (0.1.1)
+      jekyll (~> 3.5)
+      jekyll-seo-tag (~> 2.0)
     jekyll-theme-slate (0.1.1)
       jekyll (~> 3.5)
       jekyll-seo-tag (~> 2.0)
@@ -93,15 +96,16 @@ PLATFORMS
 
 DEPENDENCIES
   asciidoctor-diagram
-  jekyll (~> 3.8.5)
+  jekyll
   jekyll-asciidoc
   jekyll-feed (~> 0.6)
   jekyll-last-modified-at
   jekyll-seo-tag
   jekyll-sitemap
+  jekyll-theme-cayman
   jekyll-theme-slate
   jekyll-toc
-  minima (~> 2.0)
+  minima
   pygments.rb
   rexml
   tzinfo-data
