@@ -31,10 +31,17 @@ classdef util
     end
     
     function mkdir(dir)
-        [ok,msg,msgid] = mkdir(dir);
+        [ok,msg] = mkdir(dir);
         if ~ok
             error('Failed creating directory "%s": %s', dir, msg);
         end
+    end
+    
+    function out = strings2java(str)
+      out = javaArray('java.lang.String', numel(str));
+      for i = 1:numel(str)
+        out(i) = java.lang.String(str(i));
+      end
     end
     
   end
