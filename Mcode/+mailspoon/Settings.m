@@ -13,7 +13,7 @@ classdef Settings < mailspoon.internal.MailSpoonBaseHandle
         this (1,1)
         indent (1,1) string = ""
       end
-      function p(fmt, varargin)
+      function p(fmt, varargin) %#ok<DEFNU>
         fprintf(indent + fmt + '\n', varargin{:});
       end
       disp(this);
