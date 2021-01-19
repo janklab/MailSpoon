@@ -1,11 +1,6 @@
 ---
 layout: default
 ---
-# MailSpoon
-
-Sophisticated HTML and MIME email generation for Matlab.
-
-## About
 
 MailSpoon is a Matlab library for generating advanced emails using HTML and MIME capabilities. It supports HTML email, inline images, file attachments, Cc and Bcc addresses, SMTP server configuration, and more. It is suitable for server-side automation of email generation.
 
