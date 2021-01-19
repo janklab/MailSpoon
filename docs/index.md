@@ -151,6 +151,6 @@ MailSpoon was written by [Andrew Janke](https://apjanke.net).
 
 The project home page is the repo page on GitHub at <https://github.com/janklab/MailSpoon>. Bug reports and feature requests are welcome.
 
-MailSpoon is part of the [Janklab](https://github.com/janklab) suite of libraries for Matlab.
+MailSpoon is part of the [Janklab](https://janklab.net) suite of libraries for Matlab.
 
 Thank you to [BAND-MAID](https://www.youtube.com/channel/UCJToUvYrmkmTCR-bluEaQfA) and [Lovebites](https://www.facebook.com/LovebitesTheBand/) for powering my coding.
