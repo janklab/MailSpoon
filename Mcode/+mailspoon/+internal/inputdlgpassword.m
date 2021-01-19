@@ -5,12 +5,6 @@ arguments
   dlgtitle (1,1) string = "Enter password"
 end
 
-out = impl1(prompt, dlgtitle);
-
-end
-
-function out = impl1(prompt, dlgtitle)
-
 import javax.swing.JPanel
 import javax.swing.JLabel
 import javax.swing.JPasswordField
@@ -29,23 +23,6 @@ if choice == 0
   out = string(passwordField.getPassword');
 else
   % Cancelled
-  out = [];
-end
-end
-
-function out = impl2(prompt, dlgtitle) %#ok<INUSL,DEFNU>
-
-import javax.swing.JPanel
-import javax.swing.JLabel
-import javax.swing.JPasswordField
-import javax.swing.JOptionPane
-
-passField = JPasswordField;
-okCancel = JOptionPane.showConfirmDialog([], passField, dlgtitle, JOptionPane.OK_CANCEL_OPTION, ...
-  JOptionPane.PLAIN_MESSAGE);
-if okCancel == JOptionPane.OK_OPTION
-  out = string(passField.getPassword);
-else
   out = [];
 end
 end
