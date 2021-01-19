@@ -34,6 +34,8 @@ _site
 .jekyll-cache
 Gemfile.lock
 docs/site/
+docs/_site
+docs/Gemfile.lock
 
 # Compiled class file
 *.class
