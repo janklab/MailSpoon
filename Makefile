@@ -24,6 +24,10 @@ test:
 build:
 	./dev-kit/build_mailspoon
 
+.PHONY: doc-src
+doc-src:
+	cp -R examples docs
+
 .PHONY: doc
 doc:
 	cd docs && ./make_doc
