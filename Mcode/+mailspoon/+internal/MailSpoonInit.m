@@ -17,11 +17,12 @@ classdef MailSpoonInit
         end
         
         % Get vendored Matlab libs on path
-        libmat = fullfile(mailspoon.globals.distroot, 'lib', 'matlab');
+        distroot = fileparts(fileparts(fileparts(fileparts(mfilename('fullpath')))));
+        libmat = fullfile(distroot, 'lib', 'matlab');
         addpath(fullfile(libmat, 'dispstr', 'Mcode'));
         
         % Get Java JARs on path
-        libjava = fullfile(mailspoon.globals.distroot, 'lib', 'java');
+        libjava = fullfile(distroot, 'lib', 'java');
         javaaddpath(fullfile(libjava, 'MailSpoonJavaSupport-0.1.0-SNAPSHOT.jar'));
         libapache = fullfile(libjava, 'commons-email-1.5');
         jars = [
@@ -40,7 +41,7 @@ classdef MailSpoonInit
         s.initialized = true;
         setappdata(0, 'mailspoon', s);
 
-        fprintf('MailSpoon %s initialized\n', mailspoon.globals.version);
+        fprintf('MailSpoon %s initialized\n', libVersion(distroot));
         fprintf('This is prerelease, alpha-quality software! It may be buggy!\n');
       end
       
@@ -48,3 +49,7 @@ classdef MailSpoonInit
     
 end
   
+function out = libVersion(distroot)
+versionFile = fullfile(distroot, 'VERSION');
+out = strtrim(mailspoon.internal.readtext(versionFile));
+end
