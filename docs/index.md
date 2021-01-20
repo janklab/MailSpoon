@@ -148,4 +148,6 @@ The project home page is the [GitHub repo page](https://github.com/janklab/MailS
 
 MailSpoon is part of the [Janklab](https://janklab.net) suite of libraries for Matlab.
 
+MailSpoon's basic functionality is based on [this post](https://undocumentedmatlab.com/articles/sending-html-emails-from-matlab) from Yair Altman at [Undocumented Matlab](https://undocumentedmatlab.com/).
+
 Thank you to [BAND-MAID](https://www.youtube.com/channel/UCJToUvYrmkmTCR-bluEaQfA) and [Lovebites](https://www.facebook.com/LovebitesTheBand/) for powering my coding.
